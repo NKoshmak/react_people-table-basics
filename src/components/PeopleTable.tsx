@@ -32,6 +32,9 @@ export const PeopleTable: React.FC<Props> = ({
 
       <tbody>
         {people.map(person => {
+          const mother = people.find(p => p.name === person.motherName) || null;
+          const father = people.find(p => p.name === person.fatherName) || null;
+
           return (
             <tr
               data-cy="person"
@@ -48,28 +51,16 @@ export const PeopleTable: React.FC<Props> = ({
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td
-                className={classNames({
-                  'has-text-danger': people.find(
-                    m => person.motherName === m.name,
-                  ),
-                })}
-              >
-                {person.mother ? (
-                  <PersonLink person={person.mother} />
+              <td>
+                {mother ? (
+                  <PersonLink person={mother} />
                 ) : (
                   person.motherName || '-'
                 )}
               </td>
-              <td
-                className={classNames({
-                  'has-text-link': people.find(
-                    f => person.fatherName === f.name,
-                  ),
-                })}
-              >
-                {person.father ? (
-                  <PersonLink person={person.father} />
+              <td>
+                {father ? (
+                  <PersonLink person={father} />
                 ) : (
                   person.fatherName || '-'
                 )}
