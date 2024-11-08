@@ -48,14 +48,26 @@ export const PeopleTable: React.FC<Props> = ({
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td>
+              <td
+                className={classNames({
+                  'has-text-danger': people.find(
+                    m => person.motherName === m.name,
+                  ),
+                })}
+              >
                 {person.mother ? (
                   <PersonLink person={person.mother} />
                 ) : (
                   person.motherName || '-'
                 )}
               </td>
-              <td>
+              <td
+                className={classNames({
+                  'has-text-link': people.find(
+                    f => person.fatherName === f.name,
+                  ),
+                })}
+              >
                 {person.father ? (
                   <PersonLink person={person.father} />
                 ) : (
