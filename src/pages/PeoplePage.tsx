@@ -8,9 +8,6 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedPersonSlug, setSelectedPersonSlug] = useState<string | null>(
-    null,
-  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,10 +16,6 @@ export const PeoplePage = () => {
       .catch(() => setError('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
-
-  const handleSelectPerson = (slug: string) => {
-    setSelectedPersonSlug(slug);
-  };
 
   return (
     <div className="container">
@@ -42,11 +35,7 @@ export const PeoplePage = () => {
           )}
 
           {!isLoading && !error && people.length > 0 && (
-            <PeopleTable
-              people={people}
-              selectedPersonSlug={selectedPersonSlug}
-              onSelectPerson={handleSelectPerson}
-            />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
